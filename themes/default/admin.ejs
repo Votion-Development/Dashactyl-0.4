@@ -317,13 +317,13 @@
                                 <div class="card-body">
                                     <center><p id="latestversion"><span style="margin-left: 5%;">Fetching...</span></p></center>
                                     <script>
-                                        fetch("https://real2two.github.io/dashactyl/version")
+                                        fetch("https://dashactyl-development.github.io")
                                             .then(res => Promise.resolve(res.json()).then(ver => {
                                                 let currentver = "<%= settings.version.replace(/"/g, `\\\\"`) %>";
                                                 if (ver.version == currentver) {
                                                     document.getElementById("latestversion").innerHTML = `<span style="margin-left: 5%;">You are running Dashactyl version <code>${currentver}</code>. Your dashboard is up-to-date!</span>`;
 												} else if (ver.prerelease == currentver) {
-                                                    document.getElementById("latestversion").innerHTML = `<span style="margin-left: 5%;">You are running a pre-release instance of Dashactyl on version <code>${currentver}</code>. Your dashboard is up-to-date!</span>`;
+                                                    document.getElementById("latestversion").innerHTML = `<span style="margin-left: 5%;">You are running a version instance of Dashactyl on version <code>${currentver}</code>. Your dashboard is up-to-date!</span>`;
                                                 } else {
                                                     document.getElementById("latestversion").innerHTML = `<span style="margin-left: 5%;">Your dashboard is <b>not up-to-date!</b> The latest version is <code>${ver.version}</code> (or <code>${ver.prerelease}</code> for pre-releases) and you are currently running version <code><%= settings.version %></code>.</span>`;
                                                 };
