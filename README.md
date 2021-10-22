@@ -12,7 +12,7 @@ Website: https://dashactyl.com
 
 Need to install Dashactyl? Need API documentations?
 
-Check out the wiki! https://doc.dashactyl.com
+Check out the wiki! https://docs.dashactyl.com
 
 # Disclaimer
 
