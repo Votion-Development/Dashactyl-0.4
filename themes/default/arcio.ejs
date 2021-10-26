@@ -207,7 +207,7 @@
 											<div class="col-7 col-stats">
 												<div class="numbers">
 													<p class="card-category">RAM</p>
-													<h4 class="card-title"><%= ram %>MB / <%= (packages ? packages.ram : 0) + extraresources.ram %>MB</h4>
+													<h4 class="card-title"><%= ram %>MB / <%= (packages ? packages.ram : 0) + extraresources.ram + j4r.ram%>MB</h4>
 												</div>
 											</div>
 										</div>
@@ -220,13 +220,13 @@
 										<div class="row">
 											<div class="col-5">
 												<div class="icon-big text-center">
-													<i class="fas fa-save"></i>
+													<i class="fa fa-save"></i>
 												</div>
 											</div>
 											<div class="col-7 col-stats">
 												<div class="numbers">
 													<p class="card-category">DISK</p>
-													<h4 class="card-title"><%= disk %>MB / <%= (packages ? packages.disk : 0) + extraresources.disk %>MB</h4>
+													<h4 class="card-title"><%= disk %>MB / <%= (packages ? packages.disk : 0) + extraresources.disk + j4r.disk %>MB</h4>
 												</div>
 											</div>
 										</div>
@@ -245,7 +245,7 @@
 											<div class="col-7 col-stats">
 												<div class="numbers">
 													<p class="card-category">CPU</p>
-													<h4 class="card-title"><%= cpu %>% / <%= (packages ? packages.cpu : 0) + extraresources.cpu %>%</h4>
+													<h4 class="card-title"><%= cpu %>% / <%= (packages ? packages.cpu : 0) + extraresources.cpu + j4r.cpu %>%</h4>
 												</div>
 											</div>
 										</div>
@@ -264,7 +264,7 @@
 											<div class="col-7 col-stats">
 												<div class="numbers">
 													<p class="card-category">Servers</p>
-													<h4 class="card-title"><%= servers %> server<%= servers == 1 ? "" : "s" %> / <%= (packages ? packages.servers : 0) + extraresources.servers %> server<%= (packages ? packages.servers : 0) + extraresources.servers == 1 ? "" : "s" %></h4>
+													<h4 class="card-title"><%= servers %> server<%= servers == 1 ? "" : "s" %> / <%= (packages ? packages.servers : 0) + extraresources.servers + j4r.servers %> server<%= (packages ? packages.servers : 0) + extraresources.servers == 1 ? "" : "s" %></h4>
 												</div>
 											</div>
 										</div>

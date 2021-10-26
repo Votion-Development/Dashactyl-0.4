@@ -55,6 +55,15 @@ module.exports.load = async function(app, db) {
             cpu: 0,
             servers: 0
           };
+          let j4r =
+          await db.get("j4r-" + req.session.userinfo.id) ?
+            await db.get("j4r-" + req.session.userinfo.id) :
+            {
+              ram: 0,
+              disk: 0,
+              cpu: 0,
+              servers: 0
+            };
 
         let ram2 = 0;
         let disk2 = 0;
@@ -66,7 +75,7 @@ module.exports.load = async function(app, db) {
           cpu2 = cpu2 + req.session.pterodactyl.relationships.servers.data[i].attributes.limits.cpu;
         };
 
-        if (servers2 >= package.servers + extra.servers) return res.redirect(`${redirectlink}?err=TOOMUCHSERVERS`);
+        if (servers2 >= package.servers + extra.servers + j4r.servers) return res.redirect(`${redirectlink}?err=TOOMUCHSERVERS`);
 
         let name = decodeURIComponent(req.query.name);
         if (name.length < 1) return res.redirect(`${redirectlink}?err=LITTLESERVERNAME`);
@@ -88,9 +97,9 @@ module.exports.load = async function(app, db) {
         let disk = parseFloat(req.query.disk);
         let cpu = parseFloat(req.query.cpu);
         if (!isNaN(ram) && !isNaN(disk) && !isNaN(cpu)) {
-          if (ram2 + ram > package.ram + extra.ram) return res.redirect(`${redirectlink}?err=EXCEEDRAM&num=${package.ram + extra.ram - ram2}`);
-          if (disk2 + disk > package.disk + extra.disk) return res.redirect(`${redirectlink}?err=EXCEEDDISK&num=${package.disk + extra.disk - disk2}`);
-          if (cpu2 + cpu > package.cpu + extra.cpu) return res.redirect(`${redirectlink}?err=EXCEEDCPU&num=${package.cpu + extra.cpu - cpu2}`);
+          if (ram2 + ram > package.ram + extra.ram + j4r.ram) return res.redirect(`${redirectlink}?id=${req.query.id}&err=EXCEEDRAM&num=${package.ram + extra.ram + j4r.ram - ram2}`);
+        if (disk2 + disk > package.disk + extra.disk + j4r.disk) return res.redirect(`${redirectlink}?id=${req.query.id}&err=EXCEEDDISK&num=${package.disk + extra.disk + j4r.disk - disk2}`);
+        if (cpu2 + cpu > package.cpu + extra.cpu + j4r.cpu) return res.redirect(`${redirectlink}?id=${req.query.id}&err=EXCEEDCPU&num=${package.cpu + extra.cpu + j4r.cpu - cpu2}`);
           if (egginfo.minimum.ram) if (ram < egginfo.minimum.ram) return res.redirect(`${redirectlink}?err=TOOLITTLERAM&num=${egginfo.minimum.ram}`);
           if (egginfo.minimum.disk) if (disk < egginfo.minimum.disk) return res.redirect(`${redirectlink}?err=TOOLITTLEDISK&num=${egginfo.minimum.disk}`);
           if (egginfo.minimum.cpu) if (cpu < egginfo.minimum.cpu) return res.redirect(`${redirectlink}?err=TOOLITTLECPU&num=${egginfo.minimum.cpu}`);
@@ -221,10 +230,17 @@ module.exports.load = async function(app, db) {
             cpu: 0,
             servers: 0
           };
+          let j4r = await db.get("j4r-" + req.session.userinfo.id) ||
+            {
+              ram: 0,
+              disk: 0,
+              cpu: 0,
+              servers: 0
+            };
   
-        if (ram2 + ram > package.ram + extra.ram) return res.redirect(`${redirectlink}?id=${req.query.id}&err=EXCEEDRAM&num=${package.ram + extra.ram - ram2}`);
-        if (disk2 + disk > package.disk + extra.disk) return res.redirect(`${redirectlink}?id=${req.query.id}&err=EXCEEDDISK&num=${package.disk + extra.disk - disk2}`);
-        if (cpu2 + cpu > package.cpu + extra.cpu) return res.redirect(`${redirectlink}?id=${req.query.id}&err=EXCEEDCPU&num=${package.cpu + extra.cpu - cpu2}`);
+            if (ram2 + ram > package.ram + extra.ram + j4r.ram) return res.redirect(`${redirectlink}?id=${req.query.id}&err=EXCEEDRAM&num=${package.ram + extra.ram + j4r.ram - ram2}`);
+            if (disk2 + disk > package.disk + extra.disk + j4r.disk) return res.redirect(`${redirectlink}?id=${req.query.id}&err=EXCEEDDISK&num=${package.disk + extra.disk + j4r.disk - disk2}`);
+            if (cpu2 + cpu > package.cpu + extra.cpu + j4r.cpu) return res.redirect(`${redirectlink}?id=${req.query.id}&err=EXCEEDCPU&num=${package.cpu + extra.cpu + j4r.cpu - cpu2}`);
         if (egginfo.minimum.ram) if (ram < egginfo.minimum.ram) return res.redirect(`${redirectlink}?id=${req.query.id}&err=TOOLITTLERAM&num=${egginfo.minimum.ram}`);
         if (egginfo.minimum.disk) if (disk < egginfo.minimum.disk) return res.redirect(`${redirectlink}?id=${req.query.id}&err=TOOLITTLEDISK&num=${egginfo.minimum.disk}`);
         if (egginfo.minimum.cpu) if (cpu < egginfo.minimum.cpu) return res.redirect(`${redirectlink}?id=${req.query.id}&err=TOOLITTLECPU&num=${egginfo.minimum.cpu}`);
@@ -265,7 +281,7 @@ module.exports.load = async function(app, db) {
               embeds: [
                   {
                       title: "Server Modified",
-                      description: `**__User:__** ${req.session.userinfo.username}#${req.session.userinfo.discriminator} (${req.session.userinfo.id})\n\n**__New Configuration:__**\n${ram}MB Ram\n${disk}MB Disk\n${cpu}% CPU`,
+                      description: `**__User:__** ${req.session.userinfo.username}#${req.session.userinfo.discriminator} (${req.session.userinfo.id})\n\n**__New Configuration:__**\n${checkexist[0].attributes.limits.memory}MB Ram\n${checkexist[0].attributes.limits.disk}MB Disk\n${checkexist[0].attributes.limits.cpu}% CPU`,
                       color: hexToDecimal("#ffff00")
                   }
               ]

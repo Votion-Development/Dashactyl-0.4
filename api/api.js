@@ -71,6 +71,12 @@ module.exports.load = async function(app, db) {
         cpu: 0,
         servers: 0
       },
+      j4r: await db.get("j4r-" + req.query.id) ? await db.get("j4r-" + req.query.id) : {
+        ram: 0,
+        disk: 0,
+        cpu: 0,
+        servers: 0
+      },
       userinfo: userinfo,
       coins: newsettings.api.client.coins.enabled == true ? (await db.get("coins-" + req.query.id) ? await db.get("coins-" + req.query.id) : 0) : null
     });

@@ -38,6 +38,12 @@ module.exports.renderdataeval =
         cpu: 0,
         servers: 0
       }),
+      j4r: !req.session.userinfo ? null : (await db.get("j4r-" + req.session.userinfo.id) ? await db.get("j4r-" + req.session.userinfo.id) : {
+        ram: 0,
+        disk: 0,
+        cpu: 0,
+        servers: 0
+      }),
       packages: req.session.userinfo ? newsettings.api.client.packages.list[await db.get("package-" + req.session.userinfo.id) ? await db.get("package-" + req.session.userinfo.id) : newsettings.api.client.packages.default] : null,
       coins: newsettings.api.client.coins.enabled == true ? (req.session.userinfo ? (await db.get("coins-" + req.session.userinfo.id) ? await db.get("coins-" + req.session.userinfo.id) : 0) : null) : null,
       pterodactyl: req.session.pterodactyl,

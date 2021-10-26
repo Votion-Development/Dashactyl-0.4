@@ -16,6 +16,16 @@
          "enabled": false,
          "code": "api token here, anyone who has access to this token can ran administrator settings"
        },
+       "j4r": {
+        "enabled": true,
+        "servers": ["Guild id","another guild id"],
+        "every": {
+            "cpu": 5,
+            "ram": 512,
+            "disk": 2048,
+            "servers": 1
+        }
+      },
        "bot": {
          "token": "bot token",
          "joinguild": {

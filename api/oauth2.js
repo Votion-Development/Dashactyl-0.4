@@ -22,7 +22,7 @@ module.exports.load = async function(app, db) {
   app.get("/login", async (req, res) => {
     if (req.query.redirect) req.session.redirect = "/" + req.query.redirect;
     let newsettings = JSON.parse(fs.readFileSync("./settings.json"));
-    res.redirect(`https://discord.com/api/oauth2/authorize?client_id=${settings.api.client.oauth2.id}&redirect_uri=${encodeURIComponent(settings.api.client.oauth2.link + settings.api.client.oauth2.callbackpath)}&response_type=code&scope=identify%20email${newsettings.api.client.bot.joinguild.enabled == true ? "%20guilds.join" : ""}${settings.api.client.oauth2.prompt == false ? "&prompt=none" : (req.query.prompt ? (req.query.prompt == "none" ? "&prompt=none" : "") : "")}`);
+    res.redirect(`https://discord.com/api/oauth2/authorize?client_id=${settings.api.client.oauth2.id}&redirect_uri=${encodeURIComponent(settings.api.client.oauth2.link + settings.api.client.oauth2.callbackpath)}&response_type=code&scope=identify%20email${newsettings.api.client.bot.joinguild.enabled == true ? "%20guilds.join" : ""}${newsettings.api.client.j4r.enabled == true ? "%20guilds" : ""}${settings.api.client.oauth2.prompt == false ? "&prompt=none" : (req.query.prompt ? (req.query.prompt == "none" ? "&prompt=none" : "") : "")}`);
   });
 
   app.get("/logout", (req, res) => {
@@ -66,6 +66,16 @@ module.exports.load = async function(app, db) {
         }
       );
       let userinfo = JSON.parse(await userjson.text());
+      let guildsjson = await fetch(
+        'https://discord.com/api/users/@me/guilds',
+        {
+          method: "get",
+          headers: {
+            "Authorization": `Bearer ${codeinfo.access_token}`
+          }
+        }
+      );
+      let guildsinfo = JSON.parse(await guildsjson.text());
       if (userinfo.verified == true) {
         
         let ip = (newsettings.api.client.oauth2.ip["trust x-forwarded-for"] == true ? (req.headers['x-forwarded-for'] || req.connection.remoteAddress) : req.connection.remoteAddress);
@@ -106,6 +116,25 @@ module.exports.load = async function(app, db) {
           }
 
           res.cookie('accountid', userinfo.id);
+        }
+        let j4r = newsettings.api.client.j4r.every;
+        let newj4r = {
+                "cpu": 0,
+                "ram": 0,
+                "disk": 0,
+                "servers": 0
+            }
+        if (newsettings.api.client.j4r.enabled == true) {
+            if (guildsinfo.message == '401: Unauthorized') return res.send("Please allow us to know what servers you are in to let the J4R system work properly.")
+        	await guildsinfo.forEach(async (guild) => {
+                if (newsettings.api.client.j4r.servers.indexOf(guild.id) >= 0) {
+                    newj4r.cpu = newj4r.cpu + j4r.cpu
+                    newj4r.ram = newj4r.ram + j4r.ram
+                    newj4r.disk = newj4r.disk + j4r.disk
+                    newj4r.servers = newj4r.servers + j4r.servers
+                }
+        	})
+            db.set("j4r-" + userinfo.id, newj4r)
         }
 
         if (newsettings.api.client.bot.joinguild.enabled == true) {
