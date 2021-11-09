@@ -1,6 +1,6 @@
 {
   "name": "dashactyl",
-  "version": "0.4.0",
+  "version": "0.4.5",
   "description": "Dashactyl is a professional panel for allowing users to split resources for servers on the Pterodactyl Panel.",
   "main": "index.js",
   "dependencies": {
@@ -225,7 +225,7 @@
   "author": "Two",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/real2two/dashactyl/issues"
+    "url": "https://github.com/Dashactyl-Development/Dashactyl-0.4/issues"
   },
-  "homepage": "https://github.com/real2two/dashactyl#readme"
+  "homepage": "https://github.com/Dashactyl-Development/Dashactyl-0.4#readme"
 }
