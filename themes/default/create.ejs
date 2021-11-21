@@ -220,14 +220,9 @@
                                     <% } else if (req.query.err == "EXCEEDRAM" || req.query.err == "EXCEEDDISK" || req.query.err == "EXCEEDCPU") { %>
                                         The server could not be modified because you have requested to modified a server that exceeds your plan.
                                     <% } else { %>
-                                        I won't mind to add a little easter egg here. :)
-                                    <% } %>
-                                <% } else { %>
-                                    I won't mind to add a little easter egg here. :)
-                                <% } %>
-                            <% } else { %>
-                                I won't mind to add a little easter egg here. :)
-                            <% } %>
+                                        There has been an error while attempting to create your server. Please alert an administrator to fix this problem.
+                                    <% } %>   
+                                <% } %>   
                         <% } %>
                         </h5>
             <% } %>
