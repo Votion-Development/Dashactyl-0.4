@@ -17,3 +17,6 @@ Check out the wiki! https://docs.dashactyl.com
 # Disclaimer
 
 We are not responsible for any damages.
+# Info about fork
+
+I am trying to implement mcworld's linkvertise earning method.THIS IS NOT READY FOR PRODUCTION YET.
