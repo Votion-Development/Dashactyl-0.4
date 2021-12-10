@@ -27,6 +27,7 @@ module.exports.load = async function(app, db) {
             let theme = indexjs.get(req);
             let code = req.query.code ? req.query.code.slice(0, 200) : Math.random().toString(36).substring(2, 15);
             if (!code.match(/^[a-z0-9]+$/i)) return res.redirect(theme.settings.redirect.couponcreationfailed + "?err=CREATECOUPONINVALIDCHARACTERS");
+            let newsettings = JSON.parse(require("fs").readFileSync("./settings.json"));
             let coins = newsettings.api.lv.coins //yoinked from admin.js thank me later
              let ram = 0;
             let disk = 0;
@@ -44,6 +45,7 @@ module.exports.load = async function(app, db) {
                 cpu: cpu,
                 servers: servers
             });
+            
             let redeemcouponlink = theme.settings.redirect.redeemcoupon
             let codelink = `${redeemcouponlink}?code=${code}`
             let linkuserid = newsettings.lv.userid
