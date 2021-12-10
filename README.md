@@ -20,3 +20,5 @@ We are not responsible for any damages.
 # Info about fork
 
 I am trying to implement mcworld's linkvertise earning method.THIS IS NOT READY FOR PRODUCTION YET.
+I dont have a ptero panel so if anyone wants to spin up a test one. Please dm me.
+If you tried to use this and it worked then make a issue and let me know or dm me.
