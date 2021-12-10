@@ -209,6 +209,11 @@
           "_comment5": "The coins variable is meant to not be under 1. There may be bugs if the coins variable is less than 1.",
           "coins": 1
         }
+    },
+    "lv": {
+      "enabled": false,
+      "userid": "linkvertise userid",
+      "coins": 5
     }
   }
 }

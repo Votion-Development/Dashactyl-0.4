@@ -41,7 +41,8 @@
         "couponrevokefailed": "/admin",
         "couponrevokesuccess": "/admin",
         "removeaccountfailed": "/admin",
-        "removeaccountsuccess": "/admin"
+        "removeaccountsuccess": "/admin",
+        "redeemcoupon": "/coupon_redeem"
     },
     "pages": {
         "dashboard": "dashboard.ejs",
