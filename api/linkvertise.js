@@ -26,7 +26,7 @@ module.exports.load = async function(app, db) {
         if (newsettings.api.lv.enabled == true) {
             let theme = indexjs.get(req);
             let code = req.query.code ? req.query.code.slice(0, 200) : Math.random().toString(36).substring(2, 15);
-            if (!code.match(/^[a-z0-9]+$/i)) return res.redirect(theme.settings.redirect.couponcreationfailed + "?err=CREATECOUPONINVALIDCHARACTERS");
+            if (!code.match(/^[a-z0-9]+$/i)) return res.redirect(theme.settings.redirect.missingorinvalidlvcode + "?err=CREATECOUPONINVALIDCHARACTERS");
             let newsettings = JSON.parse(require("fs").readFileSync("./settings.json"));
             let coins = newsettings.api.lv.coins //yoinked from admin.js thank me later
              let ram = 0;
@@ -46,9 +46,9 @@ module.exports.load = async function(app, db) {
                 servers: servers
             });
             
-            let redeemcouponlink = theme.settings.redirect.redeemcoupon
+            let redeemcouponlink = `${req.headers.host}/${theme.settings.redirect.redeemcoupon}?code=${code}`
             let codelink = `${redeemcouponlink}?code=${code}`
-            let linkuserid = newsettings.lv.userid
+            let linkuserid = newsettings.api.lv.userid
             let linkredirect = linkvertise(linkuserid,codelink)
             res.redirect(linkredirect)
         }

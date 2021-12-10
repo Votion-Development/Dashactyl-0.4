@@ -43,6 +43,7 @@
         "removeaccountfailed": "/admin",
         "removeaccountsuccess": "/admin",
         "successfullyredeemedlvcoupon": "/lve?success=true",
+        "missingorinvalidlvcode": "/lve",
         "redeemcoupon": "/lvredeem"
     },
     "pages": {
