@@ -132,12 +132,14 @@
 									<p>Shop</p>
 								</a>
 							</li>
-							<li class="nav-item active">
-								<a href="javascript:void(0)" class="collapsed">
-									<i class="fas fa-coins"></i>
-									<p>AFK Page</p>
-								</a>
-							</li>
+							<% if (settings.api.arcio["afk page"].enabled == true) { %>
+								<li class="nav-item">
+									<a href="/afk" class="collapsed">
+										<i class="fas fa-coins"></i>
+										<p>AFK Page</p>
+									</a>
+								</li>                    
+							<% } %>
                             <li class="nav-item active">
 								<a href="javascript:void(0)" class="collapsed">
 									<i class="fas fa-coins"></i>
