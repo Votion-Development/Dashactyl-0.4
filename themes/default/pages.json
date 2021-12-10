@@ -42,7 +42,8 @@
         "couponrevokesuccess": "/admin",
         "removeaccountfailed": "/admin",
         "removeaccountsuccess": "/admin",
-        "redeemcoupon": "/coupon_redeem"
+        "successfullyredeemedlvcoupon": "/lve?success=true",
+        "redeemcoupon": "/lvredeem"
     },
     "pages": {
         "dashboard": "dashboard.ejs",
@@ -52,7 +53,8 @@
         "admin": "admin.ejs",
         "store": "store.ejs",
         "afk": "arcio.ejs",
-        "redeem": "redeem.ejs"
+        "redeem": "redeem.ejs",
+        "lve": "lv.ejs"
     },
     "mustbeloggedin": [
         "/dashboard",
@@ -61,7 +63,8 @@
         "/servers/edit",
         "/store",
         "/afk",
-        "/redeem"
+        "/redeem",
+        "/lve"
     ],
     "mustbeadmin": [
         "/admin"
@@ -111,6 +114,9 @@
         },
         "arcio": {
             "title": "AFK Page - Dashactyl"
+        },
+        "lve": {
+            "title": "Linkvertise - Dashactyl"
         },
         "maintenance": {
             "title": "Maintenance - Dashactyl"
