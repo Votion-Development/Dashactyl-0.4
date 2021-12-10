@@ -24,6 +24,7 @@ module.exports.load = async function(app, db) {
         return href;
           }
         if (newsettings.api.lv.enabled == true) {
+            let theme = indexjs.get(req);
             let code = req.query.code ? req.query.code.slice(0, 200) : Math.random().toString(36).substring(2, 15);
             if (!code.match(/^[a-z0-9]+$/i)) return res.redirect(theme.settings.redirect.couponcreationfailed + "?err=CREATECOUPONINVALIDCHARACTERS");
             let coins = newsettings.api.lv.coins //yoinked from admin.js thank me later
