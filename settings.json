@@ -127,7 +127,7 @@
           },
           "info": {
             "egg": 3,
-            "docker_image": "quay.io/pterodactyl/core:java",
+            "docker_image": "ghcr.io/pterodactyl/yolks:java_16",
             "startup": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -Dterminal.jline=false -Dterminal.ansi=true -jar {{SERVER_JARFILE}}",
             "environment": {
               "SERVER_JARFILE": "server.jar",
@@ -153,7 +153,7 @@
           },
           "info": {
             "egg": 1,
-            "docker_image": "quay.io/pterodactyl/core:java",
+            "docker_image": "ghcr.io/pterodactyl/yolks:java_16",
             "startup": "java -Xms128M -Xmx{{SERVER_MEMORY}}M -jar {{SERVER_JARFILE}}",
             "environment": {
               "SERVER_JARFILE": "bungeecord.jar",
